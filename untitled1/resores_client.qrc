@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/new/client">
+        <file>images/Add_Action.png</file>
+    </qresource>
+</RCC>
