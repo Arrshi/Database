@@ -92,6 +92,7 @@ void Dialog::addSeat(){
        }
        return;
    }
+   if(this->ui->checkBox->isChecked()){
    TRY_BEGIN
     this->m_db->addSeat(this->ui->travel->text(),this->ui->checkBox->text(),this->ui->spinBox->text());
    CATCH_BEGIN int CATCH_ARG
@@ -105,6 +106,24 @@ void Dialog::addSeat(){
    CATCH_END
            QMessageBox succsesful(QMessageBox::Information,tr("Успешно"),tr("Место куплено!"),QMessageBox::Ok);
             succsesful.exec();
+            return;
+   }
+   if(this->ui->checkBox_2->isChecked()){
+   TRY_BEGIN
+    this->m_db->addSeat(this->ui->travel->text(),this->ui->checkBox_2->text(),this->ui->spinBox->text());
+   CATCH_BEGIN int CATCH_ARG
+           QMessageBox selectexep(QMessageBox::Critical,tr("Внимание!"),tr("Введены некорректные данные.Проверьте правильность заполнения!"),QMessageBox::Ok);
+          selectexep.exec();
+          return;
+   CATCH_BEGIN...CATCH_ARG
+           QMessageBox addexep(QMessageBox::Critical,tr("Внимание!"),tr("Введены некорректные данные.Возможно место уже занято!"),QMessageBox::Ok);
+           addexep.exec();
+           return;
+   CATCH_END
+           QMessageBox succsesful(QMessageBox::Information,tr("Успешно"),tr("Место куплено!"),QMessageBox::Ok);
+            succsesful.exec();
+            return;
+   }
 }
 
 void Dialog::timer()
